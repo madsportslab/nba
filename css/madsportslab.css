@@ -1,0 +1,63 @@
+/* madsportslab.css */
+
+html, body {
+  font-family: Arial;
+  font-size: 100%;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+}
+
+a, a:visited, a:hover, a:link {
+  text-decoration: none;
+  font-weight: 300;
+}
+
+/* custom colors */
+
+white {
+  color: #fff;
+}
+
+blue {
+  color: #00b0ff;
+}
+
+/* bootstrap overrides */
+
+:root {
+  --bs-body-bg: #111;
+  --bs-body-color: #fff;
+  --bs-tertiary-color: #ddd;
+  --bs-link-color: #039be5;
+  --bs-link-color-rgb: 3, 155, 229;
+  --bs-navbar-color: #fff;
+  --bs-navbar-active-color: #ff0000;
+  --bs-navbar-link-color: #fff;
+  --bs-card-color: #fff;
+  --bs-card-title-color: #ff0000;
+  --bs-card-subtitle-color: #00ff00;
+  --bs-card-border-color: #00bf00;
+  --bs-emphasis-color: #ff0000;
+  --bs-emphasis-color-rgb: 255, 0, 0;
+}
+
+.card {
+  margin-top: 20px;
+  //border-bottom: dotted 1px #0D47A1;
+}
+
+.card-title {
+  color: #fff;
+}
+
+.card-subtitle {
+  //color: #039be5;
+  color: #444;
+}
+
+.card-text {
+  color: #aaa;
+}
