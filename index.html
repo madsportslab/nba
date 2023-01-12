@@ -4,7 +4,7 @@
     <title>madsportslab.NBA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/madsportslab.css" rel="stylesheet"/>
-    <script src="https://unpkg.com/mkdown@1.0.4/dist/bundle.js"></script>
+    <script src="https://unpkg.com/mkdown@1.0.5/dist/bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/madsportslab.js"></script>
   </head>
@@ -26,26 +26,21 @@
     </div>
     <main class="container-fluid mt-5">
       <div class="row">
-        <div id="news" class="col">
+        <div id="news" class="col-lg-8">
+        </div>
+        <div id="scores" class="col-lg-4">
+          <h3>hello world</h3>
         </div>
       </div>
     </main>
 
     <script>
 
-      function f(k) {
-
-        const article = gh.articles.get(k);
-
-        addArticle(article.title, marked.parse(article.content));
-
-      } // f
-
       const Github = window.default;
 
-      const gh = new Github("stephenhu", "blog-www", ["README.md"]);
+      const gh = new Github("https://stephenhu.github.io/blog-www", "meta.json");
 
-      gh.getArticles(f);
+      gh.getIndex(createList);
 
     </script>
 
