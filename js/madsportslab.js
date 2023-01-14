@@ -40,6 +40,10 @@ function updateArticle(c) {
   
   a.innerHTML = marked.parse(d.content);
 
+  const creation = document.getElementById(c + ".creation");
+
+  creation.innerText = new Date(d.creation).toUTCString();
+
 } // updateArticle
 
 
@@ -57,12 +61,13 @@ function addArticle(a) {
   cardBody.setAttribute(ATTR_CLASS, CLASS_CARD_BODY);
   cardTitle.setAttribute(ATTR_CLASS, CLASS_CARD_TITLE);
   cardSubTitle.setAttribute(ATTR_CLASS, CLASS_CARD_SUBTITLE);
+  cardSubTitle.setAttribute(ATTR_ID, a.id + ".creation");
   cardText.setAttribute(ATTR_CLASS, CLASS_CARD_TEXT);
   cardText.setAttribute(ATTR_ID, a.id);
 
-  cardTitle.innerHTML   = a.id;
+  cardTitle.innerHTML     = gh._page + "/" + a.id;
   //cardText.innerHTML    = content;
-  cardSubTitle.innerHTML = "Jan 6, 2023";
+  //cardSubTitle.innerHTML  = "Jan 6, 2023";
 
   cardBody.appendChild(cardTitle);
   cardBody.appendChild(cardSubTitle);
