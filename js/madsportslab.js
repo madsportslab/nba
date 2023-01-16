@@ -38,11 +38,12 @@ function updateArticle(c) {
 
   let d = gh.articles.get(c);
   
+  console.log(d);
   a.innerHTML = marked.parse(d.content);
 
   const creation = document.getElementById(c + ".creation");
 
-  creation.innerText = new Date(d.creation).toUTCString();
+  creation.innerText = new Date(d._creation).toUTCString();
 
 } // updateArticle
 

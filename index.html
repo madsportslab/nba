@@ -12,7 +12,9 @@
     <div class="container-fluid">
       <nav class="navbar navbar-expand">
         <div class="navbar-brand">
-          <a class="blue" href="#">madsportslab nba analysis</a>
+          <a class="blue" href="#">
+            <h2 class="display-3">madsportslab:nba</h2>
+          </a>
         </div>
         <div class="collapse navbar-collapse">
           <div class="navbar-nav">
@@ -36,13 +38,13 @@
 
     <script>
 
-      const base    = "https://stephenhu.github.io/blog-www";
+      const base    = "https://madsportslab.github.io/nba";
       const index   = "meta.json";
 
       const Github = window.default;
 
       const gh = new Github(base, index);
-      console.log(gh._page);
+
       gh.getIndex(createList);
       
 
