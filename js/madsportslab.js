@@ -10,6 +10,7 @@ const TAG_A                 = "a";
 
 const ATTR_CLASS            = "class";
 const ATTR_ID               = "id";
+const ATTR_HREF             = "href";
 
 const CLASS_CARD            = "card";
 const CLASS_CARD_BODY       = "card-body";
@@ -37,13 +38,15 @@ function updateArticle(c) {
   const a = document.getElementById(c);
 
   let d = gh.articles.get(c);
-  
-  console.log(d);
+
   a.innerHTML = marked.parse(d.content);
 
-  const creation = document.getElementById(c + ".creation");
+  //const creation = document.getElementById(c + ".creation");
 
-  creation.innerText = new Date(d._creation).toUTCString();
+  //console.log(d._creation);
+  //console.log(Date.now());
+
+  //creation.innerText = new Date(d._creation);
 
 } // updateArticle
 
@@ -57,6 +60,7 @@ function addArticle(a) {
   const cardTitle       = document.createElement(TAG_H5);
   const cardSubTitle    = document.createElement(TAG_H6);
   const cardText        = document.createElement(TAG_P);
+  const link            = document.createElement(TAG_A);
 
   card.setAttribute(ATTR_CLASS, CLASS_CARD);
   cardBody.setAttribute(ATTR_CLASS, CLASS_CARD_BODY);
@@ -66,9 +70,14 @@ function addArticle(a) {
   cardText.setAttribute(ATTR_CLASS, CLASS_CARD_TEXT);
   cardText.setAttribute(ATTR_ID, a.id);
 
-  cardTitle.innerHTML     = gh._page + "/" + a.id;
-  //cardText.innerHTML    = content;
-  //cardSubTitle.innerHTML  = "Jan 6, 2023";
+  const url = gh._page + "/" + a.id;
+
+  link.setAttribute(ATTR_HREF, url);
+  link.innerText = url;
+
+  cardSubTitle.innerText  = new Date(a.timestamp * 1000).toUTCString();
+
+  cardTitle.appendChild(link);
 
   cardBody.appendChild(cardTitle);
   cardBody.appendChild(cardSubTitle);
