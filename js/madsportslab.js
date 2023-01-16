@@ -7,6 +7,7 @@ const TAG_H5                = "h5";
 const TAG_H6                = "h6";
 const TAG_P                 = "p";
 const TAG_A                 = "a";
+const TAG_HR                = "hr";
 
 const ATTR_CLASS            = "class";
 const ATTR_ID               = "id";
@@ -61,6 +62,7 @@ function addArticle(a) {
   const cardSubTitle    = document.createElement(TAG_H6);
   const cardText        = document.createElement(TAG_P);
   const link            = document.createElement(TAG_A);
+  const hr              = document.createElement(TAG_HR);
 
   card.setAttribute(ATTR_CLASS, CLASS_CARD);
   cardBody.setAttribute(ATTR_CLASS, CLASS_CARD_BODY);
@@ -81,6 +83,7 @@ function addArticle(a) {
 
   cardBody.appendChild(cardTitle);
   cardBody.appendChild(cardSubTitle);
+  cardBody.appendChild(hr);
   cardBody.appendChild(cardText);
 
   card.appendChild(cardBody);
