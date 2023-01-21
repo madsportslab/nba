@@ -40,7 +40,11 @@ function updateArticle(c) {
 
   let d = gh.articles.get(c);
 
-  a.innerHTML = marked.parse(d.content);
+  const article = marked.parse(d.content);
+
+  a.innerHTML = article;
+
+  console.log(mkdcore.summarize(article, 100));
 
   //const creation = document.getElementById(c + ".creation");
 
