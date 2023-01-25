@@ -1,6 +1,7 @@
 /* madsportslab.js */
 
 const NEWS_ID               = "news";
+const ARTICLES_ID           = "articles";
 
 const TAG_DIV               = "div";
 const TAG_H5                = "h5";
@@ -40,11 +41,13 @@ function updateArticle(c) {
 
   let d = gh.articles.get(c);
 
-  const article = marked.parse(d.content);
-
+  const article = marked.parse(d.summary(200));
+  
   a.innerHTML = article;
 
-  console.log(mkdcore.summarize(article, 100));
+  const title = document.getElementById(c + ".title");
+
+  title.innerText = d._title;
 
   //const creation = document.getElementById(c + ".creation");
 
@@ -79,7 +82,7 @@ function addArticle(a) {
   const url = gh._page + "/" + a.id;
 
   link.setAttribute(ATTR_HREF, url);
-  link.innerText = url;
+  link.setAttribute(ATTR_ID, a.id + ".title");
 
   cardSubTitle.innerText  = new Date(a.timestamp * 1000).toUTCString();
 
