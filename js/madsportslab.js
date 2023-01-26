@@ -23,13 +23,21 @@ const CLASS_CARD_TITLE      = "card-title";
 const CLASS_ROW             = "row";
 const CLASS_COL             = "col";
 
+const ID_CREATION           = ".creation";
+const ID_TITLE              = ".title";
+const ID_ARTICLES           = ".articles";
+const ID_NEWS               = ".news";
+
 
 function createList() {
 
   let meta = gh.meta;
 
   for(let i = 0; i < meta.content.length; i++) {
-    addArticle(meta.content[i]);
+    
+    addArticle(meta.content[i], true);
+    addArticle(meta.content[i], false);
+
   }
 
 } // createList
@@ -37,17 +45,25 @@ function createList() {
 
 function updateArticle(c) {
 
-  const a = document.getElementById(c);
+  const a1 = document.getElementById(c + ID_NEWS);
+  const a2 = document.getElementById(c + ID_ARTICLES);
 
   let d = gh.articles.get(c);
 
-  const article = marked.parse(d.summary(200));
+  const articleShort = marked.parse(d.summary(200));
+  const articleLong = marked.parse(d.content);
+
+  const titleNews = document.getElementById(
+    c + ID_TITLE + ID_NEWS);
   
-  a.innerHTML = article;
+  const titleArticles = document.getElementById(
+    c + ID_TITLE + ID_ARTICLES);
 
-  const title = document.getElementById(c + ".title");
+  a1.innerHTML = articleShort;
+  a2.innerHTML = articleLong;
 
-  title.innerText = d._title;
+  titleNews.innerText         = d._title;
+  titleArticles.innerText     = d._title;
 
   //const creation = document.getElementById(c + ".creation");
 
@@ -59,9 +75,15 @@ function updateArticle(c) {
 } // updateArticle
 
 
-function addArticle(a) {
+function addArticle(a, isSummary) {
 
-  const news = document.getElementById(NEWS_ID);
+  var obj = null;
+
+  if(isSummary) {
+    obj = document.getElementById(NEWS_ID);
+  } else {
+    obj = document.getElementById(ARTICLES_ID);
+  }
 
   const card            = document.createElement(TAG_DIV);
   const cardBody        = document.createElement(TAG_DIV);
@@ -75,14 +97,30 @@ function addArticle(a) {
   cardBody.setAttribute(ATTR_CLASS, CLASS_CARD_BODY);
   cardTitle.setAttribute(ATTR_CLASS, CLASS_CARD_TITLE);
   cardSubTitle.setAttribute(ATTR_CLASS, CLASS_CARD_SUBTITLE);
-  cardSubTitle.setAttribute(ATTR_ID, a.id + ".creation");
+
+  if(isSummary) {
+    cardSubTitle.setAttribute(ATTR_ID, a.id + ID_CREATION + ID_NEWS);
+  } else {
+    cardSubTitle.setAttribute(ATTR_ID, a.id + ID_CREATION + ID_ARTICLES);
+  }
+
   cardText.setAttribute(ATTR_CLASS, CLASS_CARD_TEXT);
-  cardText.setAttribute(ATTR_ID, a.id);
 
   const url = gh._page + "/" + a.id;
 
   link.setAttribute(ATTR_HREF, url);
-  link.setAttribute(ATTR_ID, a.id + ".title");
+
+  if(isSummary) {
+
+    cardText.setAttribute(ATTR_ID, a.id + ID_NEWS);
+    link.setAttribute(ATTR_ID, a.id + ID_TITLE + ID_NEWS);
+
+  } else {
+
+    cardText.setAttribute(ATTR_ID, a.id + ID_ARTICLES);
+    link.setAttribute(ATTR_ID, a.id + ID_TITLE + ID_ARTICLES);
+
+  }
 
   cardSubTitle.innerText  = new Date(a.timestamp * 1000).toUTCString();
 
@@ -95,7 +133,7 @@ function addArticle(a) {
 
   card.appendChild(cardBody);
 
-  news.appendChild(card);
+  obj.appendChild(card);
 
   gh.getContent(a.id, updateArticle);
 
